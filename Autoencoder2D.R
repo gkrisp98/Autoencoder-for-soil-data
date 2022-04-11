@@ -4,7 +4,6 @@ library(keras)
 otutable <- read.csv("C:/Users/dell/Downloads/otutable-sub2k/abundance-Soil-non-saline.tsv", sep = '\t', header = TRUE, row.names = "seqID")
 x_train <- otutable
 x_train <- as.matrix(x_train)
-#x_train <- t(x_train)
 
 input_size = ncol(x_train)
 
@@ -42,7 +41,7 @@ summary(aen)
 
 aen %>% compile(optimizer="rmsprop", loss="mean_squared_error")
 
-aen %>% fit(x_train,x_train, epochs=100, batch_size=128) #More epochs to run, loss is still decreasing
+aen %>% fit(x_train,x_train, epochs=50, batch_size=128) 
 
 encoded = encoder %>% predict(x_train)
 

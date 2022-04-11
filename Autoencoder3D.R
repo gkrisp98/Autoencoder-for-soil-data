@@ -4,7 +4,7 @@ library(keras)
 otutable <- read.csv("C:/Users/dell/Downloads/otutable-sub2k/abundance-Soil-non-saline.tsv", sep = '\t', header = TRUE, row.names = "seqID")
 x_train <- otutable
 x_train <- as.matrix(x_train)
-#x_train <- t(x_train)
+
 
 input_size = ncol(x_train)
 
@@ -42,8 +42,7 @@ summary(aen)
 
 aen %>% compile(optimizer="rmsprop", loss="mean_squared_error")
 
-aen %>% fit(x_train,x_train, epochs=200, batch_size=128) #More epochs to run, loss is still decreasing
-
+aen %>% fit(x_train,x_train, epochs=50, batch_size=128) 
 encoded = encoder %>% predict(x_train)
 
 #--------------------------------PLOT 3D---------------------------------------
@@ -58,8 +57,6 @@ DF <- data.frame(x = encoded[,1], y = encoded[,2], z = encoded[,3], group = seq.
 s3d <- with(DF, scatterplot3d(x, y, z, color = as.numeric(group), pch = 19, main = "5 layers colored"))
 
 
-#legend(s3d$xyz.convert(0.5, 0.7, 0.5), pch = 19, yjust=0,
-#       legend = levels(DF$group), col = seq_along(levels(DF$group)))
 
 
 
